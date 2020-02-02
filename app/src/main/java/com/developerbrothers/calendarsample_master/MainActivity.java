@@ -1,6 +1,30 @@
-# Custom-Calendar-View
-Custom Android Calendar
-HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
+package com.developerbrothers.calendarsample_master;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+public class MainActivity extends AppCompatActivity {
+    public GregorianCalendar cal_month, cal_month_copy;
+    private HwAdapter hwAdapter;
+    private TextView tv_month;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
         HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday","this is holiday"));
         HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Holi","Holiday","this is holiday"));
         HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Statehood Day","Holiday","this is holiday"));
@@ -85,3 +109,21 @@ HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
         hwAdapter.notifyDataSetChanged();
         tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.rahu){
+            Intent intent = new Intent(MainActivity.this, RahuTimeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
